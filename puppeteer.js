@@ -3,7 +3,9 @@ const puppeteer = require("puppeteer");
 module.exports = async (url) => {
   try {
     const browser = await puppeteer.launch({
-      ignoreDefaultArgs: ["--disable-extensions"],
+      headless: true,
+
+      ignoreDefaultArgs: ["--disable-extensions", "--no-sandbox"],
     });
     const page = await browser.newPage();
     await page.goto(url, { waitUntil: "networkidle2" });
