@@ -1,4 +1,3 @@
-const Server = require("./server");
 const osu = require("node-os-utils");
 const cpu = osu.cpu;
 const count = cpu.count(); // 8
@@ -16,5 +15,3 @@ osCmd.whoami().then((userName) => {
 const info = cpu.average();
 
 console.log("info :", info);
-
-new Server().start();

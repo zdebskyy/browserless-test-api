@@ -37,9 +37,11 @@ module.exports = async (url) => {
     // console.log(carData);
     const pathToData = path.join("temp", "car.txt");
 
-    await fs.writeFile(pathToData, JSON.stringify(carData), "utf8");
+    const merc = path.join(__dirname, "temp", "mercedes", "merc.txt");
 
-    const content = await fs.readFile(pathToData, "utf8");
+    // await fs.writeFile(merc, JSON.stringify(carData), "utf8");
+
+    const content = await fs.readFile(merc, "utf8");
     console.log(JSON.parse(content));
 
     await browser.close();
