@@ -1,17 +1,34 @@
 const osu = require("node-os-utils");
 const cpu = osu.cpu;
-const count = cpu.count(); // 8
-
-cpu.usage().then((cpuPercentage) => {
-  console.log("cpuPercentage :", cpuPercentage); // 10.38
-});
-
+const drive = osu.drive;
+const memory = osu.mem;
 const osCmd = osu.osCmd;
 
-osCmd.whoami().then((userName) => {
-  console.log("userName :", userName); // admin
-});
+module.exports = async () => {
+  const cpuPercentage = await cpu.usage();
+  console.log("cpuPercentage :", cpuPercentage);
 
-const info = cpu.average();
+  const userName = await osCmd.whoami();
+  console.log("User name :", userName);
 
-console.log("info :", info);
+  const cpuAverageInfo = cpu.average();
+  console.log("cpuAverageInfo :", cpuAverageInfo);
+
+  const freeCpu = await cpu.free();
+  console.log("cpu free info :", freeCpu);
+
+  const driveInfo = await drive.info();
+  console.log("drive info :", driveInfo);
+
+  const memoryInfo = await memory.info();
+  console.log("memory info :", memoryInfo);
+
+  return {
+    cpuPercentage,
+    userName,
+    cpuAverageInfo,
+    freeCpu,
+    driveInfo,
+    memoryInfo,
+  };
+};

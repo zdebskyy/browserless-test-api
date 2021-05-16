@@ -1,13 +1,14 @@
 const fetchProducts = require("../puppeteer");
+const serverData = require("../cpuUtil");
 
 class AdminController {
   async testController(req, res) {
     res.status(200).json({ message: "Everything is working" });
   }
   async getStatus(req, res) {
-    res
-      .status(200)
-      .json({ cpu: "50%", memory: "73%", freeSlots: "20", log: "Error" });
+    const data = await serverData();
+
+    res.status(200).json(data);
   }
   async getCarNames(req, res) {
     const { url } = req.body;
