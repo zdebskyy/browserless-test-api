@@ -1,4 +1,6 @@
 const puppeteer = require("puppeteer");
+const { promises: fs } = require("fs");
+const path = require("path");
 
 module.exports = async (url) => {
   try {
@@ -17,17 +19,31 @@ module.exports = async (url) => {
     });
     // console.log(data);
 
-    //   const price = await page.evaluate(() => {
-    //     const results = document.querySelectorAll(
-    //       ".bold.green.size22[data-currency]"
-    //     );
+    const price = await page.evaluate(() => {
+      const results = document.querySelectorAll(
+        ".bold.green.size22[data-currency]"
+      );
 
-    //     return [...results].map((el) => el.innerText);
-    //   });
-    //   console.log(price);
+      return [...results].map((el) => el.innerText);
+    });
+    // console.log(price);
+
+    const carData = data.map((el, index) => {
+      return {
+        name: el,
+        price: price[index],
+      };
+    });
+    // console.log(carData);
+    const pathToData = path.join("temp", "car.txt");
+
+    await fs.writeFile(pathToData, JSON.stringify(carData), "utf8");
+
+    const content = await fs.readFile(pathToData, "utf8");
+    console.log(JSON.parse(content));
 
     await browser.close();
-    return data;
+    return carData;
   } catch (error) {
     console.log("error :", error);
   }
