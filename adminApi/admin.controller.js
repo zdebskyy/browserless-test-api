@@ -1,5 +1,9 @@
 const fetchProducts = require("../puppeteer");
 const serverData = require("../cpuUtil");
+const path = require("path");
+const { promises: fs } = require("fs");
+
+const url = "https://www.olx.ua/uk/";
 
 class AdminController {
   async testController(req, res) {
@@ -10,11 +14,10 @@ class AdminController {
 
     res.status(200).json(data);
   }
-  async getCarNames(req, res) {
-    const { url } = req.body;
+  async search(req, res) {
     const data = await fetchProducts(url);
-    console.log(data);
-    res.status(200).json(data);
+
+    res.status(200).json("OK");
   }
 }
 
