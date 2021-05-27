@@ -19,7 +19,6 @@ module.exports = async (url) => {
     const page = await browser.newPage();
     await page.goto(url, { waitUntil: "networkidle2" });
     // await page.type("#userEmail", "technomaster@ukr.net", { delay: 0 });
-    // await page.type("#userPass", "Zdebskyy13", { delay: 0 });
     // await page.screenshot({ path: "response.png", fullPage: true });
     // await page.solveRecaptchas();
     // await Promise.all([
@@ -27,6 +26,8 @@ module.exports = async (url) => {
     //   page.click(".rc-anchor-checkbox"),
     // ]);
     // await page.click("#se_userLogin");
+
+    // CANT PATH CAPCHA.....
 
     // Main search bar => outputs the search result
     await page.type("#headerSearch", "iphone 7");
@@ -107,4 +108,6 @@ module.exports = async (url) => {
   } catch (error) {
     console.log("error :", error);
   }
+
+  // SCREANSHOTS MADE FOR INSURE THAT IM ON THE RIGHT PLASCE
 };
